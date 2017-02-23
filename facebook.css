@@ -1,0 +1,28 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: helvetica, sans-serif; 
+	font-size: 14px;
+	color: purple;
+	text-align: center;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	margin-top: 20px;
+}
+
+.form_element {
+	margin-top: 10px;
+}
+
+.button {
+	font-family: helvetica, sans-serif;
+	color: navy;
+	text-transform: uppercase;
+	font-weight: 700;
+}
