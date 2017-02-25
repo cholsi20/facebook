@@ -4,9 +4,6 @@
 	<title>
 	Facebook Test
 	</title>
-
-	<script type="text/javascript" src="facebook.js">
-	</script>
 	
 	<link rel="stylesheet" href="facebook.css" type="text/css">
 </head>
@@ -16,7 +13,184 @@
 		Javascript Test Below
 	</h1>
 
-	<input type="button" onclick="welcome()" value="We're Screwed!" class="form_element button">
+	<br>
+
+	<script>
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN START TIME OBJECT */
+		var startTime = {
+		    time: 0,
+		};
+
+		Object.defineProperty(startTime, 'begin', {
+		    get: function() {
+		        return time;
+		    },
+
+		    set: function(aTime) {
+		        if ( aTime >= 0 && aTime <=1440 ) {
+		        	this.time = aTime;
+		    	}
+
+		    	else {
+		    		this.time = 0;
+		    	} /* end else */
+		    
+		    } /* end set */
+		});
+		/* END START TIME OBJECT */
+
+		startTime.begin = 100;
+		document.write( startTime.time);
+
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN END TIME OBJECT */
+		var endTime = {
+		    time: 0,
+		};
+
+		Object.defineProperty(endTime, 'begin', {
+		    get: function() {
+		        return time;
+		    },
+
+		    set: function(bTime) {
+		        if ( bTime >= 0 && bTime <=1440 ) {
+		        	this.time = bTime;
+		    	}
+
+		    	else {
+		    		this.time = 0;
+		    	} /* end else */
+		    
+		    } /* end set */
+		});
+		/* END END TIME OBJECT */
+
+		endTime.begin = 500;
+		document.write( "<br>" + endTime.time);		
+
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN DAYS OF WEEK OPEN */
+		daysOfWeekOpen = [1, 2, 3, 4, 5, 6, 7];
+		/* BEGIN DAYS OF WEEK OPEN */
+
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN MENU */
+		var menu = {
+		    typeOfMenu: '',
+		};
+
+		Object.defineProperty(menu, 'displayMenu', {
+		    get: function() {
+		        return typeOfMenu;
+		    },
+
+		    set: function(menus) {
+
+		        this.typeOfMenu = menus;
+		    
+		    } /* end set */
+		});
+		/*END MENU */
+
+		menu.displayMenu = "Midnight Menu";
+		document.write( "<br> " + menu.typeOfMenu);
+
+		document.write("<br><br><br>")
+
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN GET RANGE FUNCTION */
+		function range(min, max) {
+			min = Math.ceil(min);
+  			max = Math.floor(max);
+  			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		/*END RANGE */
+
+		document.write( range(0, 1440));
+
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN GET CURRENT TIME */
+		function getCurrentTime() {
+			return range( 0, 1440 );
+		}
+		/*END GET CURRENT TIME */
+
+		document.write( "<br>" + getCurrentTime());
+		
+		/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN GET CURRENT DAY */
+		function getCurrentDay() {
+			return range( 1, 7);
+		}
+		/*END GET CURRENT DAY */
+
+		document.write( "<br>" + getCurrentDay());
+
+		document.write( "<br><br><br>");
+
+		/* ------------------------------------ BEGIN TEST */
+		var currentSchedule = [
+		{startTime: 0, endTime: 120, daysOfWeekOpen: [1, 2, 3, 4], menu: "Midnight Menu"}, 
+		{startTime: 660, endTime: 780, daysOfWeekOpen: [1, 2, 3, 4], menu: "Lunch Menu"}, 
+		{startTime: 1080, endTime: 1200, daysOfWeekOpen: [1, 2, 3, 4], menu: "Dinner Menu"},
+		{startTime: 0, endTime: 1440, daysOfWeekOpen: [7], menu: "Sunday Menu"}
+		];
+
+		/*
+		var leadingText() {
+			return "Current time: " + currentTime + " Current Day: " + currentDay + " Menu: ";
+		}
+		*/
+
+		function menuDisplay() {
+			var currentTime = getCurrentTime();
+			var currentDay = getCurrentDay();
+
+			
+			for(int = 0; int < currentSchedule.length; int++) {
+				/* if there is no current menu for the time displayed, then get next menu */ 	
+				
+				if (currentTime < currentSchedule[int].endTime) {
+					
+					for ( counter = 0; counter < currentSchedule[int].daysOfWeekOpen.length; counter++ ) {
+						//if the current day is equal to a day this menu is available
+						if (currentDay == currentSchedule[int].daysOfWeekOpen[counter]) {
+							// return the matching criteria
+							return "Current time: " + currentTime + " Current Day: " + currentDay + " Menu: " + currentSchedule[int].menu;
+						}
+					}
+					
+				}
+				/*if there are no more menus today, then return an empty string*/
+				else if (currentTime > currentSchedule[int].endTime && currentTime != 1440) {
+					//look to see if the current time is less than the end time for another menu
+					for (counter = 0; counter < currentSchedule.length; counter++) {
+						//begin with the next item in the array and see if the time reqs are met
+						if (currentTime < currentSchedule[counter].endTime) {
+							//then look through to see if the day matches a day when this menu is available
+							/*
+							for (count = 0; count < currentSchedule[counter].daysOfWeekOpen.length; count++) {
+								//if the current day is equal to a day this menu is available
+								if (currentDay == currentSchedule[counter].daysOfWeekOpen[count]) {
+								// return the matching criteria
+								return "Current time: " + currentTime + " Current Day: " + currentDay + " Menu: " + currentSchedule[counter].menu;
+								} //end if
+							} // end count for
+							*/
+
+						} // end if 
+					} //end counter for
+				}
+				
+				else {
+					return "Current time: " + currentTime + " Current Day: " + currentDay + " Menu: ";
+				}
+
+
+			}
+ 			
+		}
+
+		document.write(menuDisplay());
+
+		/*document.write(currentSchedule[3].daysOfWeekOpen.length);*/
+
+	</script>
 	
 </body>
 </html>
